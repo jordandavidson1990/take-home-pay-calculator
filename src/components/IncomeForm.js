@@ -2,9 +2,10 @@ import React from 'react';
 
 function IncomeForm() {
 
-    const handleClick = (event) => {
-        event.preventDefault();
-        console.log(event.target.income.value);
+    const handleClick = (e) => {
+        e.preventDefault();
+
+        console.log(e.target.income.value);
     }
 
     return (
