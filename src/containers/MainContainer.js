@@ -7,12 +7,14 @@ function MainContainer() {
     const [total, setTotal] = useState(0)
     const [nationalInsuranceTotal, setNationalInsuranceTotal] = useState(0)
     const [leftover, setLeftover] = useState(0)
+    const [start, setStart] = useState(0)
 
     useEffect(() => {
         getLeftoverTotal()
-    }, [total, nationalInsuranceTotal])
+    })
 
     const calculateIncomeTax = (value) => {
+        setStart(value)
         // basic tax, 20% of anything between 12,500 & 50,000
         if (value >= 12500.00 && value <= 50000.00) {
             let taxableAmount = value - 12500.00
@@ -69,17 +71,19 @@ function MainContainer() {
     const calculate = (value) => {
         calculateNationalInsurance(value)
         calculateIncomeTax(value)
-        getLeftoverTotal(value)
+        // getLeftoverTotal(value)
     }
 
-    const getLeftoverTotal = (value) => {
-        setLeftover(value - (total + nationalInsuranceTotal))
+    const getLeftoverTotal = () => {
+        // debugger
+        setLeftover(start - (parseFloat(total) + parseFloat(nationalInsuranceTotal)))
     }
 
     return (
         <>
             <h1>Take Home Pay</h1>
             <IncomeForm calculate={calculate} />
+            <p>Starting amount: £{start}</p>
             <p>The amount of tax you will pay per year is £{total}</p>
             <p>The amount of National Insurance per year you pay is £{nationalInsuranceTotal}</p>
             <p>You are left with: £{leftover}</p>
