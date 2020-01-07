@@ -1,18 +1,18 @@
 import React from 'react';
 
-function IncomeForm() {
+function IncomeForm({ calculate }) {
 
     const handleClick = (e) => {
         e.preventDefault();
 
-        console.log(e.target.income.value);
+        calculate(e.target.income.value);
     }
 
     return (
         <>
             <form onSubmit={handleClick}>
                 <label htmlFor="income">Enter Your Income...</label>
-                <input type="number" placeholder="Income" min={0} step={500} id="income" />
+                <input type="number" placeholder="Income" min={0} step={1} id="income" />
                 <input type="submit" value="Calculate" />
             </form>
         </>
