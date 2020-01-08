@@ -1,0 +1,15 @@
+table {
+    border-spacing: 10px;
+    margin: auto;
+    text-align: center;
+    background-color: #f1f1c1;
+}
+
+table,
+th,
+td,
+caption {
+    border: 1px solid black;
+    border-collapse: collapse;
+    background-color: #f1f1c1;
+}
