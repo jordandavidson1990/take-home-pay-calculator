@@ -99,8 +99,6 @@ function MainContainer() {
             <p>Starting amount: {parseFloat(start).toLocaleString(uk, localeStringSpecs)}</p>
             <p>The amount of tax you will pay per year is {incomeTotal.toLocaleString(uk, localeStringSpecs)}</p>
             <p>The amount of National Insurance per year you pay is {nationalInsuranceTotal.toLocaleString(uk, localeStringSpecs)}</p>
-            <p>You are left with: {leftover.toLocaleString(uk, localeStringSpecs)}</p>
-            <p>Per Month you are left with: {((leftover / 12).toLocaleString(uk, localeStringSpecs))}</p>
             <ResultTable leftover={leftover} localeStringSpecs={localeStringSpecs} uk={uk} />
         </>
     )
