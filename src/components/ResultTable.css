@@ -13,3 +13,7 @@ caption {
     border-collapse: collapse;
     background-color: #f1f1c1;
 }
+
+th {
+    text-align: left;
+}

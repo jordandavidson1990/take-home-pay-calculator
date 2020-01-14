@@ -8,10 +8,11 @@ function MainContainer() {
     const [nationalInsuranceTotal, setNationalInsuranceTotal] = useState(0)
     const [leftover, setLeftover] = useState(0)
     const [start, setStart] = useState(0)
+    const [pensionPayment, setPensionPayment] = useState(0)
 
     useEffect(() => {
         getLeftoverTotal()
-    })
+    }, [start, pensionPayment])
 
     const calculateIncomeTax = (value) => {
         setStart(value)
@@ -75,17 +76,21 @@ function MainContainer() {
         }
     }
 
+    const calculatePension = (pensionPercentage, totalIncome) => {
+
+        setPensionPayment(parseFloat(totalIncome) * parseFloat(pensionPercentage * 0.0075))
+    }
+
     const calculate = (value) => {
-        // debugger
         calculateNationalInsurance(value.income.value)
         calculateIncomeTax(value.income.value)
-        // getLeftoverTotal(value)
+        calculatePension(value.pension.value, value.income.value)
     }
 
     const getLeftoverTotal = () => {
-        // debugger
         const total = start - (parseFloat(incomeTotal) + parseFloat(nationalInsuranceTotal))
-        setLeftover(total)
+
+        setLeftover(total - pensionPayment)
     }
 
     const localeStringSpecs = { maximumFractionDigits: 2, style: 'currency', currency: 'GBP' }
@@ -96,10 +101,15 @@ function MainContainer() {
         <>
             <h1>Take Home Pay</h1>
             <IncomeForm calculate={calculate} />
-            <p>Starting amount: {parseFloat(start).toLocaleString(uk, localeStringSpecs)}</p>
-            <p>The amount of tax you will pay per year is {incomeTotal.toLocaleString(uk, localeStringSpecs)}</p>
-            <p>The amount of National Insurance per year you pay is {nationalInsuranceTotal.toLocaleString(uk, localeStringSpecs)}</p>
-            <ResultTable leftover={leftover} localeStringSpecs={localeStringSpecs} uk={uk} />
+
+            <ResultTable
+                leftover={leftover}
+                localeStringSpecs={localeStringSpecs}
+                uk={uk}
+                pension={pensionPayment}
+                start={start}
+                incomeTotal={incomeTotal}
+                nationalInsuranceTotal={nationalInsuranceTotal} />
         </>
     )
 }
