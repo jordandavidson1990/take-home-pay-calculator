@@ -12,7 +12,7 @@ function MainContainer() {
 
     useEffect(() => {
         getLeftoverTotal()
-    }, [start, pensionPayment])
+    }, [start, pensionPayment, nationalInsuranceTotal])
 
     const calculateIncomeTax = (value) => {
         setStart(value)
@@ -60,7 +60,6 @@ function MainContainer() {
     }
 
     const calculateNationalInsurance = (value) => {
-
         // You can earn up to £8632 before paying national insurance
         // Basic rate of 12% applies before £50,024
         if (value > 8632 && value <= 50024) {
